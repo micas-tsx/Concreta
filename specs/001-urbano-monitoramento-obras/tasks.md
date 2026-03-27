@@ -194,18 +194,18 @@ description: "Task list for CONCRETA - Painel de Monitoramento Urbano de Obras P
 
 **Purpose**: Improvements that affect multiple user stories
 
-- [ ] T079 [P] Add Playwright E2E tests for critical user flows in `frontend/tests/e2e/`
-- [ ] T080 [P] Add Vitest unit tests for utility functions in `frontend/tests/unit/`
-- [ ] T081 [P] Add React Testing Library component tests in `frontend/tests/components/`
+- [x] T079 [P] Add Playwright E2E tests for critical user flows in `frontend/tests/e2e/`
+- [x] T080 [P] Add Vitest unit tests for utility functions in `frontend/tests/unit/`
+- [x] T081 [P] Add React Testing Library component tests in `frontend/tests/components/`
 - [x] T082 Create StatsGrid component with summary metrics in `frontend/src/components/dashboard/stats-grid.tsx`
-- [ ] T083 Add keyboard shortcuts for accessibility (search, filters)
-- [ ] T084 Add focus trap for modals and dropdowns
-- [ ] T085 Add reduced motion preference support
-- [ ] T086 Optimize map marker clustering for 1000+ works
-- [ ] T087 Add performance monitoring (Core Web Vitals)
-- [ ] T088 Add Lighthouse CI configuration
+- [x] T083 Add keyboard shortcuts for accessibility (search, filters)
+- [x] T084 Add focus trap for modals and dropdowns
+- [x] T085 Add reduced motion preference support
+- [x] T086 Optimize map marker clustering for 1000+ works
+- [x] T087 Add performance monitoring (Core Web Vitals)
+- [x] T088 Add Lighthouse CI configuration
 - [x] T089 Create 404 page for obra not found
-- [ ] T090 Update README with final project documentation
+- [x] T090 Update README with final project documentation
 
 ---
 

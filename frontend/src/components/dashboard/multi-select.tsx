@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { ChevronDown, ChevronUp } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
@@ -27,6 +27,36 @@ export function MultiSelect({
   onClear,
 }: MultiSelectProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+        return;
+      }
+
+      if (event.key === "Tab" || event.key === "ShiftTab") {
+        setIsOpen(false);
+      }
+    };
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("keydown", handleKeyDown);
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isOpen]);
 
   return (
     <div className="space-y-2">
@@ -45,11 +75,13 @@ export function MultiSelect({
           </Button>
         )}
       </div>
-      <div className="relative">
+      <div className="relative" ref={dropdownRef}>
         <Button
           variant="outline"
           size="sm"
           onClick={() => setIsOpen(!isOpen)}
+          aria-haspopup="listbox"
+          aria-expanded={isOpen}
           className="w-full justify-between h-8 text-xs"
         >
           <span>
@@ -65,10 +97,15 @@ export function MultiSelect({
         </Button>
 
         {isOpen && (
-          <div className="absolute z-10 top-full left-0 mt-1 w-48 bg-card border rounded-md shadow-lg py-1 max-h-60 overflow-auto">
+          <div
+            role="listbox"
+            className="absolute z-10 top-full left-0 mt-1 w-48 bg-card border rounded-md shadow-lg py-1 max-h-60 overflow-auto"
+          >
             {options.map((option) => (
               <button
                 key={option.value}
+                role="option"
+                aria-selected={selected.includes(option.value)}
                 onClick={() => onToggle(option.value)}
                 className={cn(
                   "w-full px-3 py-1.5 text-left text-sm hover:bg-accent transition-colors",

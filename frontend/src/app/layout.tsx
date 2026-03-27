@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { WebVitalsProvider } from "@/components/providers/web-vitals-provider";
+import { KeyboardShortcutsProvider } from "@/components/providers/keyboard-shortcuts-provider";
+import { ReducedMotionProvider } from "@/components/providers/reduced-motion-provider";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
@@ -20,6 +23,9 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Pular para o conteúdo principal
         </a>
+        <ReducedMotionProvider />
+        <WebVitalsProvider />
+        <KeyboardShortcutsProvider />
         {children}
       </body>
     </html>

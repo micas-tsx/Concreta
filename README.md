@@ -10,6 +10,7 @@ A plataforma foi desenvolvida para estabelecer um pilar de rigor e integridade n
 
 ### Mapa Interativo
 - Visualização de todas as obras públicas em mapa interativo com markers colorizados por status
+- **Marker Clustering**: Agrupamento automático de markers para melhor performance com grandes volumes de dados (1000+ obras)
 - Popup com informações resumidas ao clicar em cada marker (nome, endereço, percentual de execução)
 - Mapas com Leaflet para performance e interatividade
 
@@ -34,16 +35,21 @@ A plataforma foi desenvolvida para estabelecer um pilar de rigor e integridade n
 - Exibição de diferenças entre valor licitado e contratado
 - Identificação de obras paralisadas com motivo
 
+### Exportação
+- Exportação para CSV com dados completos
+- Exportação para PDF via impressão do navegador
+- Opção de incluir detalhes extras no export
+
 ## Tech Stack
 
 - **Framework**: Next.js 14 (App Router)
 - **Linguagem**: TypeScript 5.x
 - **Estilização**: Tailwind CSS com Dark Mode
 - **Componentes**: Shadcn/ui (Radix UI)
-- **Mapa**: Leaflet + react-leaflet
+- **Mapa**: Leaflet + react-leaflet + leaflet.markercluster
 - **Estado**: Zustand
 - **Gráficos**: Recharts
-- **Testes**: Playwright + Vitest
+- **Testes**: Playwright + Vitest + React Testing Library
 
 ## Estrutura do Projeto
 
@@ -59,13 +65,18 @@ concreta/
 │   │   │   ├── map/          # Componentes do mapa
 │   │   │   ├── dashboard/    # Componentes do dashboard
 │   │   │   ├── obra/         # Componentes de detalhes da obra
-│   │   │   └── charts/       # Gráficos Recharts
+│   │   │   ├── charts/       # Gráficos Recharts
+│   │   │   └── providers/     # Providers (WebVitals, Keyboard)
 │   │   ├── hooks/           # Custom hooks
 │   │   ├── store/           # Zustand stores
 │   │   ├── types/           # TypeScript types
 │   │   ├── data/mock/       # Dados mockados
 │   │   └── lib/             # Utilitários
 │   ├── tests/               # Arquivos de teste
+│   │   ├── e2e/             # Testes E2E (Playwright)
+│   │   ├── unit/            # Testes unitários (Vitest)
+│   │   └── components/      # Testes de componentes (RTL)
+│   ├── lighthouserc.json    # Configuração Lighthouse CI
 │   └── package.json
 ├── screenshots/             # Screenshots do projeto
 └── specs/                  # Especificações do projeto
@@ -96,7 +107,41 @@ npm run start       # Servidor de produção
 npm run lint        # Verificação ESLint
 npm run typecheck   # Verificação TypeScript
 npm run test        # Testes unitários (Vitest)
+npm run test:coverage # Testes com cobertura
 npm run test:e2e    # Testes E2E (Playwright)
+```
+
+## Testes
+
+O projeto inclui três tipos de testes:
+
+### Testes Unitários (Vitest)
+```bash
+npm run test
+npm run test:coverage
+```
+
+### Testes de Componentes (React Testing Library)
+Localizados em `tests/components/`
+
+### Testes E2E (Playwright)
+```bash
+npm run test:e2e
+```
+
+## Lighthouse CI
+
+O projeto inclui configuração para Lighthouse CI que verifica:
+- Performance (mínimo 70%)
+- Accessibility (mínimo 90%)
+- Best Practices (mínimo 80%)
+- SEO (mínimo 80%)
+
+Para executar localmente:
+```bash
+cd frontend
+npm install -g @lhci/cli@0.13.x
+lhci autorun
 ```
 
 ## Cores do Status
@@ -135,14 +180,26 @@ Cada obra inclui:
 - ARIA labels e roles
 - Alto contraste em Dark Mode
 - Contraste de cores WCAG 2.1 AA
+- **Focus trap** para modais e dropdowns
 - Atalhos de teclado:
   - `Ctrl+K` ou `Cmd+K`: Focar na busca
   - `Escape`: Limpar busca ou fechar modal
+- Annúncios ARIA para alterações de filtro
 
 ## Preferências do Sistema
 
 - Suporte a `prefers-reduced-motion` para usuários que preferem menos animações
 - Dark mode automático baseado nas preferências do sistema
+- Monitoramento de Core Web Vitals integrado
+
+## Monitoramento de Performance
+
+O projeto inclui monitoramento de Core Web Vitals:
+- **LCP** (Largest Contentful Paint)
+- **FID** (First Input Delay)
+- **CLS** (Cumulative Layout Shift)
+- **TTFB** (Time to First Byte)
+- **FCP** (First Contentful Paint)
 
 ## Prints do Projeto
 
