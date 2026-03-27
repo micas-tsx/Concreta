@@ -130,10 +130,8 @@ Rationale: Security vulnerabilities can cause catastrophic harm to users and org
   - First line: max 72 characters
   - Avoid long paragraphs - summarize what was done
   - Use imperative mood ("add feature" not "added feature")
-- **Examples**:
-  - `feat(dashboard): add filter bar component`
-  - `fix(auth): resolve login timeout issue`
-  - `docs: update README with setup instructions`
+- **Commit after each task**: Make a commit after completing each task or logical unit of work
+- **NEVER commit without prior authorization** (NON-NEGOTIABLE): Always ask before committing changes
 
 ### Code Review Requirements
 
