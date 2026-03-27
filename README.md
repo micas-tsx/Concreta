@@ -228,6 +228,9 @@ A página de detalhes de cada obra exibe:
 - Cronograma de etapas com progresso
 - Gráficos de evolução da execução
 
-## Licença
+### Página Não Encontrada
 
-MIT
+![Página Não Encontrada](screenshots/obra-not-found.png)
+
+Quando uma obra não é encontrada, exibe mensagem explicativa com opção de voltar ao mapa.
+
